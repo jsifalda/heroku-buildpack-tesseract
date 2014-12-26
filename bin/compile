@@ -3,4 +3,4 @@ BUILD_DIR=$1
 
 PWD=$(pwd)
 cd $PWD
-tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+tar -zxvf tesseract.tar.gz -C $BUILD_DIR
