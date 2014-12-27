@@ -94,5 +94,5 @@ status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 PROFILE_D=$BUILD_DIR/.profile.d/tesseract.sh
 echo "export PATH=\"\$HOME/vendor/tesseract/bin:\$HOME/vendor/tesseract/lib:/sbin:/usr/sbin:\$PATH\";" > $PROFILE_D
-echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract/lib:\$LD_LIBRARY_PATH\";" >> $PROFILE_D
+echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract/lib:\$HOME/vendor/leptonica/lib:\$LD_LIBRARY_PATH\";" >> $PROFILE_D
 echo "export TESSDATA_PREFIX=\"\$HOME/vendor/share/\";" >> $PROFILE_D
