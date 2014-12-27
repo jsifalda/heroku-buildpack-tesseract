@@ -7,6 +7,10 @@ ENV_DIR=$3
 BP_DIR=$(cd $(dirname $0); cd ..; pwd)
 PWD=$(pwd)
 
+echo '!!!!!!!'
+echo $BP_DIR
+echo $PWD
+
 source $BP_DIR/bin/common.sh
 
 echo "CACHE_DIR: $CACHE_DIR"
@@ -23,7 +27,7 @@ cd $BUILD_DIR/vendor/leptonica-1.71
 ./configure --prefix=$BUILD_DIR/vendor/leptonica
 make
 make install
-LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
+LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
 
 echo "----------------- HEADERS DIR ----------------"
 echo $LIBLEPT_HEADERSDIR
@@ -42,8 +46,10 @@ make install
 
 cd $PWD
 
+ls -a
+
 mkdir -p $BUILD_DIR/vendor/share
-tar -zxvf $BUILD_DIR/tessdata.tar.gz -C $BUILD_DIR/vendor/share
+tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
 (
   if [ -d "$ENV_DIR" ]; then
