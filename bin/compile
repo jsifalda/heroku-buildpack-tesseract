@@ -58,4 +58,6 @@ echo $ENV_DIR
 # Update the PATH
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
-echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:\$PATH\";" > $BUILD_DIR/.profile.d/tesseract.sh
+echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:/sbin:\$PATH\";" > $BUILD_DIR/.profile.d/tesseract.sh
+
+ldconfig
