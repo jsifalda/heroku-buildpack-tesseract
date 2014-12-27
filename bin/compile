@@ -44,7 +44,7 @@ echo $ENV_DIR
   fi
 )
 
-TESSERACT_DIR = $BUILD_DIR/vendor/tesseract-ocr
+TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
 
 echo $TESSERACT_DIR
 
