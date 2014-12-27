@@ -9,6 +9,8 @@ PWD=$(pwd)
 
 source $BP_DIR/bin/common.sh
 
+echo "CACHE_DIR: $CACHE_DIR"
+
 cd $PWD
 
 # curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
