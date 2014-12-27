@@ -17,31 +17,27 @@ cd $PWD
 mkdir -p $BUILD_DIR/vendor/share
 tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
-# curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
-# tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
+curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
+tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
 
-# cd $BUILD_DIR/vendor/leptonica-1.71
+cd $BUILD_DIR/vendor/leptonica-1.71
 
-# ./configure --prefix=$BUILD_DIR/vendor/leptonica
-# make
-# make install
-# LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
-# export LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
+./configure --prefix=$BUILD_DIR/vendor/leptonica
+make
+make install
+export LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
 
-# echo "----------------- HEADERS DIR ----------------"
-# echo $LIBLEPT_HEADERSDIR
+cd $PWD
 
-# cd $PWD
+curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
+tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
 
-# curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
-# tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
+cd $BUILD_DIR/vendor/tesseract-ocr
 
-# cd $BUILD_DIR/vendor/tesseract-ocr
-
-# ./autogen.sh
-# ./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
-# make
-# make install
+./autogen.sh
+./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
+make
+make install
 
 (
   if [ -d "$ENV_DIR" ]; then
@@ -49,18 +45,6 @@ tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
     export_env_dir $ENV_DIR
   fi
 )
-
-# TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
-
-# echo $TESSERACT_DIR
-
-# # make them executable
-# chmod +x $TESSERACT_DIR/bin/*
-# chmod +x $TESSERACT_DIR/lib/*
-
-# # Update the PATH
-
-# PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:/sbin:$PATH
 
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
