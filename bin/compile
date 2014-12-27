@@ -1,7 +1,14 @@
-#!/bin/bash
-BUILD_DIR=$1
+#!/usr/bin/env bash
 
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+BP_DIR=$(cd $(dirname $0); cd ..; pwd)
 PWD=$(pwd)
+
+source $BP_DIR/bin/common.sh
+
 cd $PWD
 
 # curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
@@ -27,3 +34,10 @@ cd $PWD
 # ldconfig
 
 tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+
+(
+  if [ -d "$ENV_DIR" ]; then
+    status "Exporting config vars to environment"
+    export_env_dir $ENV_DIR
+  fi
+)
