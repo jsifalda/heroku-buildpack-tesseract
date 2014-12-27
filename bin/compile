@@ -3,17 +3,14 @@
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
+PWD=$(cd $(dirname $0); cd ..; pwd)
 
-BP_DIR=$(cd $(dirname $0); cd ..; pwd)
-PWD=$(pwd)
+status "PWD DIR: $PWD"
+status "BUILD DIR: $BUILD_DIR"
+status "CACHE DIR: $CACHE_DIR"
+status "ENV DIR: $ENV_DIR" 
 
-echo '!!!!!!!'
-echo $BP_DIR
-echo $PWD
-
-source $BP_DIR/bin/common.sh
-
-echo "CACHE_DIR: $CACHE_DIR"
+source $PWD/bin/common.sh
 
 cd $PWD
 
@@ -49,7 +46,7 @@ cd $PWD
 ls -a
 
 mkdir -p $BUILD_DIR/vendor/share
-tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
+tar -zxvf $PWD/tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
 (
   if [ -d "$ENV_DIR" ]; then
