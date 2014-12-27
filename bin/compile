@@ -77,13 +77,6 @@ else
 
 fi
 
-(
-	if [ -d "$ENV_DIR" ]; then
-		status "Exporting config vars to environment"
-		export_env_dir $ENV_DIR
-	fi
-)
-
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 PROFILE_D=$BUILD_DIR/.profile.d/tesseract.sh
