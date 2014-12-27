@@ -5,12 +5,12 @@ CACHE_DIR=$2
 ENV_DIR=$3
 PWD=$(cd $(dirname $0); cd ..; pwd)
 
+source $PWD/bin/common.sh
+
 status "PWD DIR: $PWD"
 status "BUILD DIR: $BUILD_DIR"
 status "CACHE DIR: $CACHE_DIR"
 status "ENV DIR: $ENV_DIR" 
-
-source $PWD/bin/common.sh
 
 cd $PWD
 
