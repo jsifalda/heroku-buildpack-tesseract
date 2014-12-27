@@ -36,7 +36,8 @@ cd $BUILD_DIR/vendor/tesseract-ocr
 ./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
 make
 make install
-# ldconfig
+
+cd $PWD
 
 mkdir -p $BUILD_DIR/vendor/share
 tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
