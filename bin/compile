@@ -12,38 +12,82 @@ status "BUILD DIR: $BUILD_DIR"
 status "CACHE DIR: $CACHE_DIR"
 status "ENV DIR: $ENV_DIR" 
 
-cd $PWD
-
 mkdir -p $BUILD_DIR/vendor/share
 tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
-curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
-tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
+if test -d $CACHE_DIR/vendor/leptonica; then
+	
+	status "Restoring leptonica directory from cache"
+	
+	cp -r $CACHE_DIR/vendor/leptonica $BUILD_DIR/vendor
 
-cd $BUILD_DIR/vendor/leptonica-1.71
+else
 
-./configure --prefix=$BUILD_DIR/vendor/leptonica
-make
-make install
+	cd $PWD
+
+	status "Downloading leptonica"
+
+	curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
+	tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
+
+	cd $BUILD_DIR/vendor/leptonica-1.71
+
+	status "Building leptonica"
+
+	./configure --prefix=$BUILD_DIR/vendor/leptonica
+	make
+	make install
+
+	status "Copy leptonica into cache"
+
+	mkdir -p $CACHE_DIR/vendor
+	cp -r $BUILD_DIR/vendor/leptonica $CACHE_DIR/vendor/leptonica
+
+	cd $CACHE_DIR/vendor/leptonica
+	ls -a
+
+fi
+
 export LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
 
-cd $PWD
+if test -d $CACHE_DIR/vendor/tesseract; then
+	
+	status "Restoring tesseract directory from cache"
+	
+	cp -r $CACHE_DIR/vendor/tesseract $BUILD_DIR/vendor
 
-curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
-tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
+else
 
-cd $BUILD_DIR/vendor/tesseract-ocr
+	cd $PWD
+	
+	status 'Downloading tesseract'
 
-./autogen.sh
-./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
-make
-make install
+	curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
+	tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
+
+	cd $BUILD_DIR/vendor/tesseract-ocr
+
+	status 'Building tesseract'
+
+	./autogen.sh
+	./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
+	make
+	make install
+
+	status 'Copy tesseract into cache'
+
+	cp -r $BUILD_DIR/vendor/leptonica $CACHE_DIR/vendor/leptonica
+
+	cd $CACHE_DIR/vendor/leptonica
+	ls -a
+
+fi
 
 (
-  if [ -d "$ENV_DIR" ]; then
-    status "Exporting config vars to environment"
-    export_env_dir $ENV_DIR
-  fi
+	if [ -d "$ENV_DIR" ]; then
+		status "Exporting config vars to environment"
+		export_env_dir $ENV_DIR
+	fi
 )
 
 status "Building runtime environment"
