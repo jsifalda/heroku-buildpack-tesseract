@@ -15,17 +15,15 @@ cd $PWD
 
 # cd $PWD
 
-curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
-tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
+# curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
+# tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
 
-cd $BUILD_DIR/vendor/tesseract-ocr
+# cd $BUILD_DIR/vendor/tesseract-ocr
 
-./autogen.sh
-./configure
-make
-make install
-ldconfig
+# ./autogen.sh
+# ./configure
+# make
+# make install
+# ldconfig
 
-#echo "dir: $BUILD_DIR"
-
-#PATH="$BUILD_DIR/vendor/tesseract-ocr/bin:$BUILD_DIR/vendor/tesseract-ocr/lib:$PATH"
+tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
