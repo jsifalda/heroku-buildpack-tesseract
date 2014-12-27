@@ -4,3 +4,4 @@ BUILD_DIR=$1
 PWD=$(pwd)
 cd $PWD
 tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$PATH\";"
