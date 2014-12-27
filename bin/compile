@@ -13,16 +13,19 @@ echo "CACHE_DIR: $CACHE_DIR"
 
 cd $PWD
 
-# curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
-# tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
+mkdir -p $BUILD_DIR/vendor
 
-# cd $BUILD_DIR/vendor/leptonica-1.71
+curl -O http://www.leptonica.org/source/leptonica-1.71.tar.gz
+tar -zxvf leptonica-1.71.tar.gz -C $BUILD_DIR/vendor
 
-# ./configure --prefix=$BUILD_DIR/vendor/leptonica
-# make
-# make install
+cd $BUILD_DIR/vendor/leptonica-1.71
 
-# cd $PWD
+./configure --prefix=$BUILD_DIR/vendor/leptonica
+make
+make install
+ export LIBLEPT_HEADERSDIR="$BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
+
+cd $PWD
 
 curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
 tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
@@ -30,12 +33,13 @@ tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
 cd $BUILD_DIR/vendor/tesseract-ocr
 
 ./autogen.sh
-./configure
+./configure --with-extra-libraries=$BUILD_DIR/vendor/leptonica/lib/ --prefix=$BUILD_DIR/vendor/tesseract
 make
 make install
-ldconfig
+# ldconfig
 
-# tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+mkdir -p $BUILD_DIR/vendor/share
+tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
 (
   if [ -d "$ENV_DIR" ]; then
@@ -44,28 +48,21 @@ ldconfig
   fi
 )
 
-TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
+# TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
 
-echo $TESSERACT_DIR
+# echo $TESSERACT_DIR
 
-# (
-#   if [ -d "$TESSERACT_DIR" ]; then
-#     status "Exporting config vars to environment 2"
-#     export_env_dir $TESSERACT_DIR
-#   fi
-# )
+# # make them executable
+# chmod +x $TESSERACT_DIR/bin/*
+# chmod +x $TESSERACT_DIR/lib/*
 
-# make them executable
-chmod +x $TESSERACT_DIR/bin/*
-chmod +x $TESSERACT_DIR/lib/*
+# # Update the PATH
 
-# Update the PATH
-
-PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:/sbin:$PATH
+# PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:/sbin:$PATH
 
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 PROFILE_D=$BUILD_DIR/.profile.d/tesseract.sh
-echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:/sbin:/usr/sbin:\$PATH\";" > $PROFILE_D
-echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract-ocr/lib:\$LD_LIBRARY_PATH\";" >> $PROFILE_D
-echo "export TESSDATA_PREFIX=\"\$HOME/vendor/tesseract-ocr/\";" >> $PROFILE_D
+echo "export PATH=\"\$HOME/vendor/tesseract/bin:\$HOME/vendor/tesseract/lib:/sbin:/usr/sbin:\$PATH\";" > $PROFILE_D
+echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract/lib:\$LD_LIBRARY_PATH\";" >> $PROFILE_D
+echo "export TESSDATA_PREFIX=\"\$HOME/vendor/share/\";" >> $PROFILE_D
