@@ -40,7 +40,7 @@ make install
 cd $PWD
 
 mkdir -p $BUILD_DIR/vendor/share
-tar -zxvf tessdata.tar.gz -C $BUILD_DIR/vendor/share
+tar -zxvf $BUILD_DIR/tessdata.tar.gz -C $BUILD_DIR/vendor/share
 
 (
   if [ -d "$ENV_DIR" ]; then
