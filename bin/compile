@@ -63,9 +63,7 @@ chmod +x $TESSERACT_DIR/lib/*
 
 # Update the PATH
 
-PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:$PATH
-
-chmod +x /usr/sbin/*
+PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:/sbin:$PATH
 
 echo "PATH: $PATH"
 
