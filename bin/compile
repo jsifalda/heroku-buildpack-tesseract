@@ -76,9 +76,9 @@ else
 
 	status 'Copy tesseract into cache'
 
-	cp -r $BUILD_DIR/vendor/leptonica $CACHE_DIR/vendor/leptonica
+	cp -r $BUILD_DIR/vendor/tesseract $CACHE_DIR/vendor/tesseract
 
-	cd $CACHE_DIR/vendor/leptonica
+	cd $CACHE_DIR/vendor/tesseract
 	ls -a
 
 fi
