@@ -44,13 +44,18 @@ echo $ENV_DIR
   fi
 )
 
-TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
+# TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
 
-echo $TESSERACT_DIR
+# echo $TESSERACT_DIR
 
-(
-  if [ -d "$TESSERACT_DIR" ]; then
-    status "Exporting config vars to environment 2"
-    export_env_dir $TESSERACT_DIR
-  fi
-)
+# (
+#   if [ -d "$TESSERACT_DIR" ]; then
+#     status "Exporting config vars to environment 2"
+#     export_env_dir $TESSERACT_DIR
+#   fi
+# )
+
+# Update the PATH
+status "Building runtime environment"
+mkdir -p $BUILD_DIR/.profile.d
+echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:\$PATH\";" > $BUILD_DIR/.profile.d/tesseract.sh
