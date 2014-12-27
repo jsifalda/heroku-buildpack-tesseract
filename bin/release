@@ -1,2 +1,8 @@
 #!/bin/sh
-echo "release"
+# bin/release <build-dir>
+
+cat <<EOF
+---
+config_vars:
+  PATH: "$1/vendor/tesseract-ocr/bin:$1/vendor/tesseract-ocr/lib:$PATH
+EOF
