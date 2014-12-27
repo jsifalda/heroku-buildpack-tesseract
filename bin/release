@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
-echo "tesseract release"
-
 cat <<EOF
 ---
 config_vars:
   PATH: $1/vendor/tesseract-ocr/bin:$1/vendor/tesseract-ocr/lib:$PATH
 EOF
-
-echo $PATH
