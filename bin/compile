@@ -24,20 +24,18 @@ cd $PWD
 
 # cd $PWD
 
-# curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
-# tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
+curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
+tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
 
-# cd $BUILD_DIR/vendor/tesseract-ocr
+cd $BUILD_DIR/vendor/tesseract-ocr
 
-# ./autogen.sh
-# ./configure
-# make
-# make install
-# ldconfig
+./autogen.sh
+./configure
+make
+make install
+ldconfig
 
-tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
-
-echo $ENV_DIR
+# tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
 
 (
   if [ -d "$ENV_DIR" ]; then
