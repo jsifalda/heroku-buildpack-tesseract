@@ -70,4 +70,4 @@ mkdir -p $BUILD_DIR/.profile.d
 PROFILE_D=$BUILD_DIR/.profile.d/tesseract.sh
 echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:/sbin:/usr/sbin:\$PATH\";" > $PROFILE_D
 echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract-ocr/lib:\$LD_LIBRARY_PATH\";" >> $PROFILE_D
-echo "export TESSDATA_PREFIX=\"\$HOME/vendor/tesseract-ocr/tessdata\";" >> $PROFILE_D
+echo "export TESSDATA_PREFIX=\"\$HOME/vendor/tesseract-ocr/\";" >> $PROFILE_D
