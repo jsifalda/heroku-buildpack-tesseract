@@ -16,7 +16,7 @@ cd $PWD
 
 # cd $BUILD_DIR/vendor/leptonica-1.71
 
-# ./configure
+# ./configure --prefix=$BUILD_DIR/vendor/leptonica
 # make
 # make install
 
