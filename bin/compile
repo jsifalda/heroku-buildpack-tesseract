@@ -8,3 +8,7 @@ tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
 echo "dir: $BUILD_DIR"
 
 PATH="$BUILD_DIR/vendor/tesseract-ocr/bin:$BUILD_DIR/vendor/tesseract-ocr/lib:$PATH"
+
+cp $BUILD_DIR/vendor/tesseract-ocr/bin/tesseract /usr/local/bin
+cp $BUILD_DIR/vendor/tesseract-ocr/lib/liblept.so.3 /usr/local/bin
+cp $BUILD_DIR/vendor/tesseract-ocr/lib/libtesseract.so.3 /usr/local/bin
