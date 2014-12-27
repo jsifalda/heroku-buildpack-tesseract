@@ -65,11 +65,9 @@ chmod +x $TESSERACT_DIR/lib/*
 
 PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:/usr/sbin/:/sbin:$PATH
 
-echo "PATH: $PATH"
-
 # ldconfig
 
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:/sbin:/usr/sbin:\$PATH\";" > $BUILD_DIR/.profile.d/tesseract.sh
-echo "export LD_LIBRARY_PATH=\"$TESSERACT_DIR/lib:\$LD_LIBRARY_PATH\"" >> $BUILD_DIR/.profile.d/tesseract.sh
+echo "export LD_LIBRARY_PATH=\"\$HOME/vendor/tesseract-ocr/lib:\$LD_LIBRARY_PATH\";" >> $BUILD_DIR/.profile.d/tesseract.sh
