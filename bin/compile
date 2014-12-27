@@ -3,12 +3,17 @@ BUILD_DIR=$1
 
 PWD=$(pwd)
 cd $PWD
-tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+curl -O https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
+tar -zxvf tesseract-ocr-3.02.02.tar.gz -C $BUILD_DIR/vendor
 
-echo "dir: $BUILD_DIR"
+cd $BUILD_DIR/vendor/tesseract-ocr
 
-PATH="$BUILD_DIR/vendor/tesseract-ocr/bin:$BUILD_DIR/vendor/tesseract-ocr/lib:$PATH"
+./autogen.sh
+./configure
+make
+make install
+ldconfig
 
-cp $BUILD_DIR/vendor/tesseract-ocr/bin/tesseract /usr/local/bin
-cp $BUILD_DIR/vendor/tesseract-ocr/lib/liblept.so.3 /usr/local/bin
-cp $BUILD_DIR/vendor/tesseract-ocr/lib/libtesseract.so.3 /usr/local/bin
+#echo "dir: $BUILD_DIR"
+
+#PATH="$BUILD_DIR/vendor/tesseract-ocr/bin:$BUILD_DIR/vendor/tesseract-ocr/lib:$PATH"
