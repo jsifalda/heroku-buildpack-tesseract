@@ -43,9 +43,6 @@ else
 	mkdir -p $CACHE_DIR/vendor
 	cp -r $BUILD_DIR/vendor/leptonica $CACHE_DIR/vendor/leptonica
 
-	cd $CACHE_DIR/vendor/leptonica
-	ls -a
-
 fi
 
 export LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
@@ -77,9 +74,6 @@ else
 	status 'Copy tesseract into cache'
 
 	cp -r $BUILD_DIR/vendor/tesseract $CACHE_DIR/vendor/tesseract
-
-	cd $CACHE_DIR/vendor/tesseract
-	ls -a
 
 fi
 
