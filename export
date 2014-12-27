@@ -1,1 +1,1 @@
-export PATH="$1/vendor/tesseract-ocr/bin:$1/vendor/tesseract-ocr/lib:$PATH"
+PATH="$1/vendor/tesseract-ocr/bin:$1/vendor/tesseract-ocr/lib:$PATH"
