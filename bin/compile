@@ -44,9 +44,9 @@ echo $ENV_DIR
   fi
 )
 
-# TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
+TESSERACT_DIR=$BUILD_DIR/vendor/tesseract-ocr
 
-# echo $TESSERACT_DIR
+echo $TESSERACT_DIR
 
 # (
 #   if [ -d "$TESSERACT_DIR" ]; then
@@ -55,9 +55,14 @@ echo $ENV_DIR
 #   fi
 # )
 
+# make them executable
+chmod +x $TESSERACT_DIR/bin/*
+chmod +x $TESSERACT_DIR/lib/*
+
 # Update the PATH
+
+PATH=$TESSERACT_DIR/bin:$TESSERACT_DIR/lib:$PATH
+
 status "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/vendor/tesseract-ocr/bin:\$HOME/vendor/tesseract-ocr/lib:/sbin:\$PATH\";" > $BUILD_DIR/.profile.d/tesseract.sh
-
-ldconfig
