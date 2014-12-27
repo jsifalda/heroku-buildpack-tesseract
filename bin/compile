@@ -23,7 +23,10 @@ cd $BUILD_DIR/vendor/leptonica-1.71
 ./configure --prefix=$BUILD_DIR/vendor/leptonica
 make
 make install
-LIBLEPT_HEADERSDIR="$BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
+LIBLEPT_HEADERSDIR="\$HOME/vendor/leptonica/include $BUILD_DIR/vendor/leptonica/include /usr/local/include /usr/include"
+
+echo "----------------- HEADERS DIR ----------------"
+echo $LIBLEPT_HEADERSDIR
 
 cd $PWD
 
